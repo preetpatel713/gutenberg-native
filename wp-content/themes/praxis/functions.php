@@ -142,3 +142,5 @@ if ( file_exists( $additional_functions ) ) {
 if ( file_exists( $security_enhancements ) ) {
 	require_once $security_enhancements;
 }
+
+require_once get_theme_file_path( 'inc/blocks.php' );
