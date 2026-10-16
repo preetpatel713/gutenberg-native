@@ -12,6 +12,7 @@
 /wp-content/themes/praxis/node_modules/
 /wp-content/themes/praxis/package-lock.json
 /wp-content/themes/praxis/package.json
+/wp-content/themes/praxis/blocks-build/
 /license.txt
 /readme.html
 /xmlrpc.php
@@ -94,3 +95,6 @@ robots.txt
 ######################
 .DS_Store*
 ehthumbs.db
+
+# AI Agents
+.claude
