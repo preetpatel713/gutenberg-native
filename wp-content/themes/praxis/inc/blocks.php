@@ -15,7 +15,7 @@ function praxis_register_category( $categories ) {
 		$categories,
 		array(
 			'slug'  => 'praxis',
-			'title' => 'Praxis Blocks',
+			'title' => 'Praxis',
 		)
 	);
 	return $categories;
