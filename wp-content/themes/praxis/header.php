@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package Theme_Name
+ * @package Praxis
  * @since 1.0.0
  */
 

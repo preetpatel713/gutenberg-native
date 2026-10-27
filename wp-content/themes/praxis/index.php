@@ -2,7 +2,7 @@
 /**
  * The main template file
  *
- * @package Theme_Name
+ * @package Praxis
  */
 
 get_header();

@@ -2,7 +2,7 @@
 /**
  * The template for displaying the footer
  *
- * @package Theme_Name
+ * @package Praxis
  * @since 1.0.0
  */
 
