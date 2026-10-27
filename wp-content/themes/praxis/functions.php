@@ -12,12 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define the theme version if not already defined.
-if ( ! defined( 'THEME_VERSION' ) ) {
-	define( 'THEME_VERSION', '1.0' );
+if ( ! defined( 'PRAXIS_THEME_VERSION' ) ) {
+	define( 'PRAXIS_THEME_VERSION', '1.0' );
 }
 // Constants.
-define( 'THEME_TEMP_URI', get_template_directory_uri() );
-define( 'THEME_TEMP_DIR', get_template_directory() );
+define( 'PRAXIS_URI', get_template_directory_uri() );
+define( 'PRAXIS_DIR', get_template_directory() );
 
 /**
  * Theme setup function.
@@ -134,17 +134,17 @@ add_filter( 'wp_resource_hints', 'praxis_google_fonts_resource_hints', 10, 2 );
 /**
  * Include additional custom theme functions.
  */
-$additional_functions = THEME_TEMP_DIR . '/inc/additional-functions.php';
-if ( file_exists( $additional_functions ) ) {
-	require_once $additional_functions;
+$additional_files = array(
+	'inc/additional-functions.php',
+	'inc/security-enhancements.php',
+	'inc/blocks.php',
+);
+
+foreach ( $additional_files as $file ) {
+	$file_path = PRAXIS_DIR . '/' . $file;
+
+	if ( file_exists( $file_path ) ) {
+		require_once $file_path;
+	}
 }
 
-$security_enhancements = THEME_TEMP_DIR . '/inc/security-enhancements.php';
-if ( file_exists( $security_enhancements ) ) {
-	require_once $security_enhancements;
-}
-
-$blocks = THEME_TEMP_DIR . '/inc/blocks.php';
-if ( file_exists( $blocks ) ) {
-	require_once $blocks;
-}
