@@ -2,7 +2,7 @@
 /**
  * Theme Prefix: Functions and Definitions
  *
- * @package   Theme_Name
+ * @package   Praxis
  * @since     1.0.0
  */
 
@@ -28,7 +28,7 @@ define( 'THEME_TEMP_DIR', get_template_directory() );
  * @since 1.0.0
  * @return void
  */
-function theme_prefix_setup() {
+function praxis_setup() {
 
 	// Add default RSS feed links to <head>.
 	add_theme_support( 'automatic-feed-links' );
@@ -42,7 +42,7 @@ function theme_prefix_setup() {
 	// Register navigation menus.
 	register_nav_menus(
 		array(
-			'header-menu' => esc_html__( 'Header Menu', 'theme-textdomain' ),
+			'header-menu' => esc_html__( 'Header Menu', 'praxis' ),
 			// Add new menu locations below if required.
 		)
 	);
@@ -82,7 +82,7 @@ function theme_prefix_setup() {
 	add_image_size( 'custom-thumb', 400, 300, true );
 	add_image_size( 'banner-full', 1600, 600, true );
 }
-add_action( 'after_setup_theme', 'theme_prefix_setup' );
+add_action( 'after_setup_theme', 'praxis_setup' );
 
 /**
  * Set the content width in pixels, based on the theme’s design.
@@ -90,17 +90,17 @@ add_action( 'after_setup_theme', 'theme_prefix_setup' );
  * @since 1.0.0
  * @return void
  */
-function theme_prefix_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'theme_prefix_content_width', 1400 );
+function praxis_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'praxis_content_width', 1400 );
 }
-add_action( 'after_setup_theme', 'theme_prefix_content_width', 0 );
+add_action( 'after_setup_theme', 'praxis_content_width', 0 );
 
 /**
  * Remove jQuery Migrate.
  *
  * @param object $scripts Array of script handles.
  */
-function theme_prefix_remove_jquery_migrate( $scripts ) {
+function praxis_remove_jquery_migrate( $scripts ) {
 	if ( ! is_admin() && isset( $scripts->registered['jquery'] ) ) {
 		$scripts->registered['jquery']->deps = array_diff(
 			$scripts->registered['jquery']->deps,
@@ -108,7 +108,7 @@ function theme_prefix_remove_jquery_migrate( $scripts ) {
 		);
 	}
 }
-add_action( 'wp_default_scripts', 'theme_prefix_remove_jquery_migrate' );
+add_action( 'wp_default_scripts', 'praxis_remove_jquery_migrate' );
 
 /**
  * Add preconnect resource hints for Google Fonts.
@@ -116,7 +116,7 @@ add_action( 'wp_default_scripts', 'theme_prefix_remove_jquery_migrate' );
  * @param array  $urls           URLs to print for resource hints.
  * @param string $relation_type  The relation type the URLs are printed for.
  */
-function theme_prefix_google_fonts_resource_hints( $urls, $relation_type ) {
+function praxis_google_fonts_resource_hints( $urls, $relation_type ) {
 	if ( 'preconnect' === $relation_type ) {
 		$urls[] = array(
 			'href' => 'https://fonts.googleapis.com',
@@ -128,19 +128,23 @@ function theme_prefix_google_fonts_resource_hints( $urls, $relation_type ) {
 	}
 	return $urls;
 }
-add_filter( 'wp_resource_hints', 'theme_prefix_google_fonts_resource_hints', 10, 2 );
+add_filter( 'wp_resource_hints', 'praxis_google_fonts_resource_hints', 10, 2 );
 
 
 /**
  * Include additional custom theme functions.
  */
-$additional_functions  = THEME_TEMP_DIR . '/includes/additional-functions.php';
-$security_enhancements = THEME_TEMP_DIR . '/includes/security-enhancements.php';
+$additional_functions = THEME_TEMP_DIR . '/inc/additional-functions.php';
 if ( file_exists( $additional_functions ) ) {
 	require_once $additional_functions;
 }
+
+$security_enhancements = THEME_TEMP_DIR . '/inc/security-enhancements.php';
 if ( file_exists( $security_enhancements ) ) {
 	require_once $security_enhancements;
 }
 
-require_once get_theme_file_path( 'inc/blocks.php' );
+$blocks = THEME_TEMP_DIR . '/inc/blocks.php';
+if ( file_exists( $blocks ) ) {
+	require_once $blocks;
+}
